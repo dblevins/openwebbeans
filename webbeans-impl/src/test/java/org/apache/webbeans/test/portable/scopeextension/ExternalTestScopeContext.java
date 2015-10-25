@@ -30,33 +30,21 @@ import javax.enterprise.event.Observes;
 
 public class ExternalTestScopeContext implements Context 
 {
-    private static final Map<Contextual<?>, Object> instances = new HashMap<Contextual<?>, Object>();
-    
-    private boolean active;
-    
     public ExternalTestScopeContext(boolean active)
     {
-        this.active = active;
     }
     
     @SuppressWarnings("unchecked")
     @Override
     public <T> T get(Contextual<T> component) 
     {
-        
-        return (T) instances.get(component);
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public <T> T get(Contextual<T> component, CreationalContext<T> creationalContext) 
     {
-        @SuppressWarnings("unchecked")
-        T instance = (T) instances.get(component);
-        if (instance == null)
-        {
-            component.create(creationalContext);
-        }
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -68,7 +56,7 @@ public class ExternalTestScopeContext implements Context
     @Override
     public boolean isActive()
     {
-        return active;
+        throw new UnsupportedOperationException();
     }
     
     public void endContext(@Observes BeforeShutdown beforeShutdown)
